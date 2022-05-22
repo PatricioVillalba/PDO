@@ -4,7 +4,7 @@ include_once 'includes/head.php';
 $objAbmProducto = new AbmProducto();
 $listaProducto = $objAbmProducto->buscar(null);
 $session = new Session();
-$permisos = [1,2];
+$permisos = [1, 2];
 if ($session->activa() && in_array($session->getRolActual(), $permisos)) {
     include_once 'includes/navbar.php';
 } else {

@@ -9,7 +9,7 @@ class AbmProducto
      */
 
     private function cargarObjeto($param)
-    {   
+    {
         $obj = null;
         if (
             array_key_exists('idproducto', $param)      and     array_key_exists('pronombre', $param)   and
@@ -29,7 +29,7 @@ class AbmProducto
                 $param['proeditorial'],
                 $param['proanio'],
                 $param['proimagen'],
-                $param['prodeshabilitado'] 
+                $param['prodeshabilitado']
             );
         }
         return $obj;

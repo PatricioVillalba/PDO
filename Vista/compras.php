@@ -7,12 +7,14 @@ $abmCompraEstado = new AbmCompraEstado();
 $abmCompraEstadoTipo = new AbmCompraEstadoTipo();
 $listaEstadoTipo = $abmCompraEstadoTipo->buscar(null);
 $listaCompras = $AbmCompra->buscar(null);
+
 $session = new Session();
 if (!$session->activa()) {
     header('Location: login.php');
     exit;
 }
-// verEstructura($listaCompras);exit;
+// verEstructura($listaCompras);
+// exit;
 ?>
 
 <div class="container">
@@ -45,13 +47,13 @@ if (!$session->activa()) {
                         <td><?= $objCompra->getIdCompra() ?></td>
                         <td id="tablaidprod<?= $objCompra->getIdCompra() ?>"><?= $objCompra->getCoFecha() ?></td>
                         <td id="tablaautorprod<?= $objCompra->getIdCompra() ?>"><?= $objCompra->getObjUsuario()->getUsNombre() ?></td>
-                        <td><a class="btn btn-sm btn-success" href="comprasDetalle.php?idcompra=<?=$objCompra->getIdCompra()?>"><i class="fa fa-eye"></i></a></td>
+                        <td><a class="btn btn-sm btn-success" href="comprasDetalle.php?idcompra=<?= $objCompra->getIdCompra() ?>"><i class="fa fa-eye"></i></a></td>
                         <td id="tablaeditorialprod<?= $objCompra->getIdCompra() ?>">
-                            <select class="form-select form-select-sm" aria-label="" onchange="cambiarEstado(this.value,<?=$ObjCompraEstado[0]->getIdCompraEstado()?>,<?=$objCompra->getIdCompra()?>)">
+                            <select class="form-select form-select-sm" aria-label="" onchange="cambiarEstado(this.value,<?= $ObjCompraEstado[0]->getIdCompraEstado() ?>,<?= $objCompra->getIdCompra() ?>)">
                                 <option selected><?= $estado ?></option>
                                 <?php foreach ($listaEstadoTipo as $estadoTipo) {
-                                    ?>
-                                    <option value="<?= $estadoTipo->getIdCompraEstTipo() ?>"><?=  $estadoTipo->getCetDescripcion() ?></option>
+                                ?>
+                                    <option value="<?= $estadoTipo->getIdCompraEstTipo() ?>"><?= $estadoTipo->getCetDescripcion() ?></option>
                                 <?php } ?>
                             </select>
                         </td>
@@ -66,4 +68,4 @@ if (!$session->activa()) {
             </tbody>
     </table>
 
-<?php include_once 'includes/footer.php' ?>
+    <?php include_once 'includes/footer.php' ?>

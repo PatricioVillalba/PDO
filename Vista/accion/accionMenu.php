@@ -6,7 +6,7 @@ $abmMenu = new AbmMenu();
 
 if (isset($datos['accion'])) {
     if ($datos['accion'] == 'editar') {
-        if ($obj=$abmMenu->modificacion($datos)) {
+        if ($obj = $abmMenu->modificacion($datos)) {
             json($obj);
         }
     }
@@ -25,23 +25,28 @@ if (isset($datos['accion'])) {
         $resultado = $abmMenu->buscar($datos);
         if (count($resultado) == 1) {
             $obj = $resultado[0];
+
             json($obj);
         }
     }
 }
 
 function json($obj)
-{   
-    $idpadre = is_null($obj->getObjMePadre()->getIdMenu()) ? '-1' : $obj->getObjMePadre()->getIdMenu();
+{
+
+    $idpadre = !empty($obj->getObjMePadre()) ?  $obj->getObjMePadre()->getIdMenu() : null;
+    $link = is_null($obj->getLink()) ? '' : $obj->getLink();
+    $descripcion = is_null($obj->getMeDescripcion()) ? '' : $obj->getMeDescripcion();
+    $nombre = is_null($obj->getMeNombre()) ? '' : $obj->getMeNombre();
     $estado = ($obj->getMeDeshabilitado() == 1) ? '1' : '2';
     echo json_encode(
         $objJson = [
             'idmenu' => $obj->getIdMenu(),
-            'menombre' => $obj->getMeNombre(),
+            'menombre' => $nombre,
             'idpadre' =>  $idpadre,
-            'link' => $obj->getLink(),
+            'link' => $link,
             'estado' => $estado,
-            'descripcion' => $obj->getMeDescripcion()
+            'descripcion' => $descripcion
         ]
     );
 }
